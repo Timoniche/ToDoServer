@@ -1,0 +1,34 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<head>
+    <title>ToDo Lists</title>
+</head>
+<body>
+
+
+<h3>ToDo Lists:</h3>
+<table>
+    <th:block th:each="toDoList : ${toDoLists}">
+        <tr>
+            <td><a th:href="'/taskLists/' + ${toDoList.getId()}" th:text="${toDoList.getName()}"></a></td>
+        </tr>
+    </th:block>
+</table>
+
+<h3>Add new ToDo List!</h3>
+<form th:object="${newToDoList}" method="POST" action="/add-tasksList">
+    <table>
+        <tr>
+            <td><label>Name:</label></td>
+            <td><label>
+                <input type="text" th:field="*{name}"/>
+            </label></td>
+        </tr>
+    </table>
+
+    <input type="submit" value="add">
+</form>
+
+
+</body>
+</html>
