@@ -1,23 +1,23 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <head>
-    <title>ToDo Lists</title>
+    <title>ToDo's:</title>
 </head>
 <body>
 
-
-<h3>ToDo Lists:</h3>
 <table>
-    <th:block th:each="toDoList : ${toDoLists}">
+    <th:block th:each="task : ${curTasks}">
         <tr>
-            <td><a th:href="'/toDoLists/' + ${toDoList.getId()}"
-                   th:text="${toDoList.getId()} + ' ' + ${toDoList.getName()}"></a></td>
+            <td><a th:href="'/taskLists/' + ${curList.getId()} + '/task/' + ${task.getId()}"
+                   th:text="${task.getName()}"></a></td>
+            <td th:text="${task.getStatus()}"></td>
         </tr>
     </th:block>
 </table>
 
-<h3>Add new ToDo List!</h3>
-<form th:object="${newToDoList}" method="POST" action="/add-tasksList">
+
+<h3>Add ToDo!</h3>
+<form th:object="${task}" method="POST" th:action="'/toDoLists/'+${curList.getId()}+'/add-todo'">
     <table>
         <tr>
             <td><label>Name:</label></td>
@@ -29,7 +29,6 @@
 
     <input type="submit" value="add">
 </form>
-
 
 </body>
 </html>

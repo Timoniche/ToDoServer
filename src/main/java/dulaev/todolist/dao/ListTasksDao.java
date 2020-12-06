@@ -1,5 +1,6 @@
 package dulaev.todolist.dao;
 
+import dulaev.todolist.model.ToDoTask;
 import dulaev.todolist.model.ToDoTasksList;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,4 +26,11 @@ public class ListTasksDao {
         return new ArrayList<>(idListMap.values());
     }
 
+    public ToDoTasksList getTasksListById(int id) {
+        return idListMap.get(id);
+    }
+
+    public List<ToDoTask> getTasksByListId(int id) {
+        return idListMap.get(id).getTasks();
+    }
 }

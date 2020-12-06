@@ -19,5 +19,13 @@ public class TaskDao {
         tasks.add(task);
     }
 
+    public void completeTask(int id) {
+        tasks.get(id).setCompleted(true);
+    }
+
+    public ToDoTask getTask(int id) {
+        return tasks.get(id);
+    }
+
 
 }
