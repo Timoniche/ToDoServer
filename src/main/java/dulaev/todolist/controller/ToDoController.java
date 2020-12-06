@@ -7,10 +7,7 @@ import dulaev.todolist.model.ToDoTasksList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class ToDoController {
@@ -44,9 +41,15 @@ public class ToDoController {
         return "toDoList";
     }
 
-    @RequestMapping(value = "toDoLists/{listId}/add-todo", method = RequestMethod.POST)
+    @RequestMapping(value = "/toDoLists/{listId}/add-todo", method = RequestMethod.POST)
     public String addToDo(@PathVariable int listId, @ModelAttribute("ToDo") ToDoTask toDoTask) {
         taskDao.addTask(listTasksDao.getTasksListById(listId), toDoTask);
+        return "redirect:/toDoLists/{listId}";
+    }
+
+    @RequestMapping(value = "/toDoLists/{listId}/complete-todo", method = RequestMethod.POST)
+    public String completeToDo(@PathVariable int listId, @RequestParam(name = "toDoId") int toDoId) {
+        taskDao.completeTask(toDoId);
         return "redirect:/toDoLists/{listId}";
     }
 

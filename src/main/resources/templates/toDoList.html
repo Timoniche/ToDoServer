@@ -5,17 +5,6 @@
 </head>
 <body>
 
-<table>
-    <th:block th:each="task : ${curTasks}">
-        <tr>
-            <td><a th:href="'/taskLists/' + ${curList.getId()} + '/task/' + ${task.getId()}"
-                   th:text="${task.getName()}"></a></td>
-            <td th:text="${task.getStatus()}"></td>
-        </tr>
-    </th:block>
-</table>
-
-
 <h3>Add ToDo!</h3>
 <form th:object="${task}" method="POST" th:action="'/toDoLists/'+${curList.getId()}+'/add-todo'">
     <table>
@@ -29,6 +18,22 @@
 
     <input type="submit" value="add">
 </form>
+
+<table>
+    <th:block th:each="task : ${curTasks}">
+        <tr>
+            <td>
+                <form th:action="'/toDoLists/'+${curList.getId()}+'/complete-todo'" method="post">
+                    <input type="hidden" name="toDoId" th:value="${task.getId()}"/>
+                    <input type="submit" value="complete" class="btn btn-danger" />
+                </form>
+            </td>
+            <td th:text="${task.getName()}"></td>
+            <td th:text="${task.getStatus()}"></td>
+        </tr>
+    </th:block>
+</table>
+
 
 </body>
 </html>
