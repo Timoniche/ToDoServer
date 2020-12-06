@@ -53,4 +53,11 @@ public class ToDoController {
         return "redirect:/toDoLists/{listId}";
     }
 
+    @RequestMapping(value = "/toDoLists/delete-list", method = RequestMethod.POST)
+    public String deleteList(@RequestParam(name = "listId") int listId) {
+        listTasksDao.deleteListById(listId);
+        return "redirect:/toDoLists";
+    }
+
+
 }

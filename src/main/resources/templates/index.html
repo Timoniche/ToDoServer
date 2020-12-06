@@ -23,6 +23,12 @@
 <table>
     <th:block th:each="toDoList : ${toDoLists}">
         <tr>
+            <td>
+                <form th:action="'/toDoLists/delete-list'" method="post">
+                    <input type="hidden" name="listId" th:value="${toDoList.getId()}"/>
+                    <input type="submit" value="delete" class="btn btn-danger" />
+                </form>
+            </td>
             <td th:text="${toDoList.getId()}"></td>
             <td><a th:href="'/toDoLists/' + ${toDoList.getId()}"
                    th:text="${toDoList.getName()}"></a></td>

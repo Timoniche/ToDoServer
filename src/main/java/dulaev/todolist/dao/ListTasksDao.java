@@ -33,4 +33,8 @@ public class ListTasksDao {
     public List<ToDoTask> getTasksByListId(int id) {
         return idListMap.get(id).getTasks();
     }
+
+    public void deleteListById(int id) {
+        idListMap.remove(id);
+    }
 }
